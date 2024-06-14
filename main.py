@@ -96,7 +96,7 @@ if __name__ == '__main__':
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0'
         }
         bbsid = re.findall(r'oi=[0-9]+', token)[0].replace('oi=', '')
-        wait_time = random.randint(1,2500) # Random Sleep to Avoid Ban
+        wait_time = random.randint(1,250) # Random Sleep to Avoid Ban
         print(f'为了避免同一时间签到人数太多导致被官方怀疑，开始休眠 {wait_time} 秒')
         time.sleep(wait_time)
         wallet = r.get(WalletURL, headers=headers, timeout=60)
@@ -147,7 +147,7 @@ if __name__ == '__main__':
                 print('正在尝试清除15分钟弹窗……')
                 for popout in json.loads(res.text)['data']['list']:
                     popid = popout['id']
-                    clear_result = r.post('https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/ackNotification', headers=headers, data={'id': str(popid)})
+                    clear_result = r.post('https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/ackNotification', headers=headers, json={'id': str(popid)})
                     try:
                         if clear_result.status_code == 200 and clear_result.json()['msg'] == 'OK':
                             print(f'已清除id为{popid}的弹窗！')
