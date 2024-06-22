@@ -149,7 +149,7 @@ if __name__ == '__main__':
                     popid = popout['id']
                     clear_result = r.post('https://api-cloudgame.mihoyo.com/hk4e_cg_cn/gamer/api/ackNotification', headers=headers, json={'id': str(popid)})
                     try:
-                        if clear_result.status_code == 200 and clear_result.json()['msg'] == 'OK':
+                        if clear_result.status_code == 200 and clear_result.json()['message'] == 'OK':
                             print(f'已清除id为{popid}的弹窗！')
                         else:
                             print(f'清除弹窗失败！返回信息为：{clear_result.text}')
